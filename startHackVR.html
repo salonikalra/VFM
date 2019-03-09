@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Virtual Fleta Media - VFM</title>
+     <script src="/js/aframe-master.js"></script>
+     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+     <script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+     <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script>
+
+     <script>
+  		AFRAME.registerComponent('refresh-obj', {
+  			init: function () {
+          let ele = this.el;
+  				this.el.addEventListener('click', function () {
+            window.alert(ele.id);
+
+  				});
+  			}
+  		});
+  	</script>
+  </head>
+  <body>
+
+      <a-scene physics = 'gravity: -9.8;'>
+        <a-entity progressive-controls></a-entity>
+
+
+
+        <a-assets>
+          <img src = '/assets/shelf/shelf.jpg' id = 'shelf'></img>
+          <img src = '/assets/shelf/shelfNormal.jpg' id = 'shelfNormal'></img>
+
+          <img src = '/assets/wall/wall.jpg' id = 'wall'></img>
+          <img src = '/assets/wall/wallNormal.jpg' id = 'wallNormal'></img>
+
+          <a-asset-item src = '/assets/gramophone/scene.gltf' id = 'gramophone'></a-asset-item>
+          <a-asset-item src = '/assets/table/scene.gltf' id = 'table'></a-asset-item>
+
+          <img src = '/assets/record/record.jpg' id = 'record'></img>
+          <img src = '/assets/record/recordNormal.jpg' id = 'recordNormal'></img>
+
+        </a-assets>
+
+
+
+        <a-sky color = 'white'>
+        </a-sky>
+
+
+
+        <!-- floor -->
+        <a-plane  static-body width = '5' height = '5' position = '0 -5 0' rotation = '-90 0 0' scale = '1000 1000'
+                material = 'src: #shelf;
+                            repeat: 5000 5000;
+                            normal-map: #shelfNormal;
+                            normal-texture-repeat: 5000 5000;
+                            roughness: 0;'
+
+        ></a-plane>
+
+        <!-- wall -->
+        <a-plane  static-body width = '50' height = '50' position = '0 7 -15.4' scale = '9 4 0'
+                material = 'src: #wall;
+                            repeat: 100 100;
+                            normal-map:#wallNormal;
+                            normal-texture-repeat: 100 100;
+                            roughness: 0.8;'
+        ></a-plane>
+
+
+        <!-- shelf-->
+          <a-box id = 'shelf-left-pane' static-body position="-19.35 8.3 -15" width = '0.3' height = '2.3' depth = '1'
+                material = 'src: #shelf;
+                            repeat: 5 5;
+                            normal-map: #shelfNormal;
+                            normal-texture-repeat: 5 5;'>
+          </a-box>
+
+          <a-box id = 'shelf' static-body position="-7 7 -15"
+                 width = '25' height = '0.3' depth = '1'
+                 material = 'src: #shelf;
+                             repeat: 5 5;
+                             normal-map: #shelfNormal;
+                             normal-texture-repeat: 5 5;'>
+          </a-box>
+
+
+
+        <!-- gramophone-->
+        <a-entity static-body id = 'gramophone' gltf-model = '#gramophone' position="13 5.133 -13" rotation = '0 80 0' scale = '3.5 3.5 3.5'></a-entity>
+        </a-entity>
+
+
+
+        <!-- table-->
+        <a-entity static-body id = 'table' gltf-model = '#table' position="11 -5 -11" rotation = '0 45 0' scale = '0.3 0.3 0.3'></a-entity>
+        </a-entity>
+
+
+
+        <!-- Records -->
+        <a-cylinder id = 'rec1' color="black" position = '-10.53 8.724 -15' rotation="90 0 0" height = '0.05' radius = '1.5'
+        material = 'side: double;
+                    src: #record;
+                    repeat: 5 5;
+                    normal-map: #recordNormal;
+                    normal-texture-repeat: 5 5;
+                    roughness: 0.1;'
+                    event-set__end="_event: grab-end;  position: 12.717 3.189 -10.68;"
+                    event-set__res2="_event: grab-end; _target: #rec2;  position: -7.3 8.724 -15;"
+                    event-set__res3="_event: grab-end; _target: #rec3;  position: -4.07 8.724 -15;"
+                    event-set__res4="_event: grab-end; _target: #rec4;  position: -0.84 8.724 -15;"
+                    event-set__res5="_event: grab-end; _target: #rec5;  position: 2.39 8.724 -15;"
+                    grabbable
+                    refresh-obj
+                    >
+          <a-cylinder color="red" material="side: double" rotation="0 0 0" position = '0 0 0' height = '0.06' radius = '0.4'></a-cylinder>
+        </a-cylinder>
+
+        <a-cylinder id = 'rec2' color="black" position = '-7.3 8.724 -15' rotation="90 0 0" height = '0.05' radius = '1.5'
+        material = 'side: double;
+                    src: #record;
+                    repeat: 5 5;
+                    normal-map: #recordNormal;
+                    normal-texture-repeat: 5 5;
+                    roughness: 0.1;'
+                    event-set__end="_event: grab-end;  position: 12.717 3.189 -10.68;"
+                    event-set__res1="_event: grab-end; _target: #rec1;  position: -10.53 8.724 -15;"
+                    event-set__res3="_event: grab-end; _target: #rec3;  position: -4.07 8.724 -15;"
+                    event-set__res4="_event: grab-end; _target: #rec4;  position: -0.84 8.724 -15;"
+                    event-set__res5="_event: grab-end; _target: #rec5;  position: 2.39 8.724 -15;"
+                    grabbable
+                    refresh-obj>
+          <a-cylinder color="red" material="side: double" rotation="0 0 0" position = '0 0 0' height = '0.06' radius = '0.4'></a-cylinder>
+        </a-cylinder>
+
+        <a-cylinder id = 'rec3' color="black" position = '-4.07 8.724 -15' rotation="90 0 0" height = '0.05' radius = '1.5'
+        material = 'side: double;
+                    src: #record;
+                    repeat: 5 5;
+                    normal-map: #recordNormal;
+                    normal-texture-repeat: 5 5;
+                    roughness: 0.1;'
+                    event-set__end="_event: grab-end;  position: 12.717 3.189 -10.68;"
+                    event-set__res1="_event: grab-end; _target: #rec1;  position: -10.53 8.724 -15;"
+                    event-set__res2="_event: grab-end; _target: #rec2;  position: -7.3 8.724 -15;"
+                    event-set__res4="_event: grab-end; _target: #rec4;  position: -0.84 8.724 -15;"
+                    event-set__res5="_event: grab-end; _target: #rec5;  position: 2.39 8.724 -15;"
+                    grabbable
+                    refresh-obj>
+          <a-cylinder color="red" material="side: double" rotation="0 0 0" position = '0 0 0' height = '0.06' radius = '0.4'></a-cylinder>
+        </a-cylinder>
+
+        <a-cylinder id = 'rec4' color="black" position = '-0.84 8.724 -15' rotation="90 0 0" height = '0.05' radius = '1.5'
+        material = 'side: double;
+                    src: #record;
+                    repeat: 5 5;
+                    normal-map: #recordNormal;
+                    normal-texture-repeat: 5 5;
+                    roughness: 0.1;'
+                    event-set__end="_event: grab-end;  position: 12.717 3.189 -10.68;"
+                    event-set__res1="_event: grab-end; _target: #rec1;  position: -10.53 8.724 -15;"
+                    event-set__res2="_event: grab-end; _target: #rec2;  position: -7.3 8.724 -15;"
+                    event-set__res3="_event: grab-end; _target: #rec3;  position: -4.07 8.724 -15;"
+                    event-set__res5="_event: grab-end; _target: #rec5;  position: 2.39 8.724 -15;"
+                    grabbable
+                    refresh-obj>
+          <a-cylinder color="red" material="side: double" rotation="0 0 0" position = '0 0 0' height = '0.06' radius = '0.4'></a-cylinder>
+        </a-cylinder>
+
+        <a-cylinder id = 'rec5' color="black" position = '2.39 8.724 -15' rotation="90 0 0" height = '0.05' radius = '1.5'
+        material = 'side: double;
+                    src: #record;
+                    repeat: 5 5;
+                    normal-map: #recordNormal;
+                    normal-texture-repeat: 5 5;
+                    roughness: 0.1;'
+                    event-set__end="_event: grab-end;  position: 12.717 3.189 -10.68;"
+                    event-set__res1="_event: grab-end; _target: #rec1;  position: -10.53 8.724 -15;"
+                    event-set__res2="_event: grab-end; _target: #rec2;  position: -7.3 8.724 -15;"
+                    event-set__res3="_event: grab-end; _target: #rec3;  position: -4.07 8.724 -15;"
+                    event-set__res4="_event: grab-end; _target: #rec4;  position: -0.84 8.724 -15;"
+                    grabbable
+                    refresh-obj>
+          <a-cylinder color="red" material="side: double" rotation="0 0 0" position = '0 0 0' height = '0.06' radius = '0.4'></a-cylinder>
+        </a-cylinder>
+
+
+
+      </a-scene>
+
+  </body>
+</html>
